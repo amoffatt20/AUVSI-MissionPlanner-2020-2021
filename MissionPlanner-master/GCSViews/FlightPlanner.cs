@@ -7398,15 +7398,15 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             // start python app with 3 arguments  
             // 1st arguments is pointer to itself,  
             // 2nd and 3rd are actual arguments we want to send 
-            Process myProcess = new Process();
+            Process searchGridProcess = new Process();
             // assign start information to the process 
-            myProcess.StartInfo = searchgrid_startinfo;
+            searchGridProcess.StartInfo = searchgrid_startinfo;
             // start the process 
-            myProcess.Start();
+            searchGridProcess.Start();
             // Read the standard output of the app we called.  
             // in order to avoid deadlock we will read output first 
             // and then wait for process terminate: 
-            myProcess.WaitForExit();
+            searchGridProcess.WaitForExit();
             ///--------------------------------------------------------------
             // python app to call 
             string myPythonApp = "C://Users//Public//Downloads//InteropCode//obstacle_avoidance.py";
@@ -7414,29 +7414,29 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             // dummy parameters to send Python script 
 
             // Create new process start info 
-            ProcessStartInfo myProcessStartInfo = new ProcessStartInfo("python.exe");
+            ProcessStartInfo FlightplanPYStartInfo = new ProcessStartInfo("python.exe");
 
             // make sure we can read the output from stdout 
-            myProcessStartInfo.UseShellExecute = false;
-            myProcessStartInfo.RedirectStandardOutput = true;
+            FlightplanPYStartInfo.UseShellExecute = false;
+            FlightplanPYStartInfo.RedirectStandardOutput = true;
 
             // start python app with 3 arguments  
             // 1st arguments is pointer to itself,  
             // 2nd and 3rd are actual arguments we want to send 
-            myProcessStartInfo.Arguments = myPythonApp;
+            FlightplanPYStartInfo.Arguments = myPythonApp;
 
-            Process myProcess1 = new Process();
+            Process flightPlanProcess = new Process();
             // assign start information to the process 
-            myProcess1.StartInfo = myProcessStartInfo;
+            flightPlanProcess.StartInfo = FlightplanPYStartInfo;
 
             //Console.WriteLine("Calling Python script with arguments");
             // start the process 
-            myProcess1.Start();
+            flightPlanProcess.Start();
 
             // Read the standard output of the app we called.  
             // in order to avoid deadlock we will read output first 
             // and then wait for process terminate: 
-            myProcess1.WaitForExit();
+            flightPlanProcess.WaitForExit();
 
         }
     }
