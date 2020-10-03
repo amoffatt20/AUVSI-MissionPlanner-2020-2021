@@ -6984,7 +6984,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             //PUT YOUR CODE BELOW THIS LINE
             //--------------------------------------------------
             List<Locationwp> cmds = new List<Locationwp>();
-            string homelist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\CompetitionTakeoffLandingPoints\NorthAirStripHome.txt");
+            string homelist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\CompetitionTakeoffLandingPoints\\NorthAirStripHome.txt");
             string[] values2 = homelist.Split(',');
             int numhomepoints = values2.Length / 2;
             for (int n = 0; n < numhomepoints; n++)
@@ -7008,7 +7008,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 wp.lat = (float)Convert.ToDouble(values2[i]);
                 cmds.Add(wp);
             }
-            string takeofflist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\CompetitionTakeoffLandingPoints\NorthAirStripTakeoff.txt");
+            string takeofflist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\CompetitionTakeoffLandingPoints\NorthAirStripTakeoff.txt");
             string[] takeoff_values = takeofflist.Split(',');
             int numtakeofflist = takeoff_values.Length / 4;
             for (int n = 0; n < numtakeofflist; n++)
@@ -7027,7 +7027,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             obstacle_startinfo.UseShellExecute = false;
             obstacle_startinfo.RedirectStandardOutput = true;
             obstacle_startinfo.CreateNoWindow = false;
-            obstacle_startinfo.FileName = "C://Users//Public//Downloads//InteropCode//interop//Pathfinding.exe";
+            obstacle_startinfo.FileName = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\Pathfinding.exe";
             obstacle_startinfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             // start python app with 3 arguments  
@@ -7047,7 +7047,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             // in order to avoid deadlock we will read output first 
             // and then wait for process terminate: 
             myProcess.WaitForExit();
-            string missionlist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\MissionPointsParsedObstacle.txt");
+            string missionlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\MissionPointsParsedObstacle.txt");
             string[] values = missionlist.Split(',');
             int nummissionpoints = values.Length / 4;
             for (int n = 0; n < nummissionpoints; n++)
@@ -7070,7 +7070,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             search_startinfo.UseShellExecute = false;
             search_startinfo.RedirectStandardOutput = true;
             search_startinfo.CreateNoWindow = false;
-            search_startinfo.FileName = "C://Users//Public//Downloads//InteropCode//interop//SearchGridWaypoints.exe";
+            search_startinfo.FileName = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\SearchGridWaypoints.exe";
             search_startinfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             // start python app with 3 arguments  
@@ -7091,7 +7091,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             // and then wait for process terminate: 
             myProcess_search.WaitForExit();
 
-            string searchlist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\SearchGridWaypoints.txt");
+            string searchlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\SearchGridWaypoints.txt");
             searchlist.TrimEnd(',');
             string[] values_search = searchlist.Split(',');
             int numsearchpoints = values_search.Length / 4;
@@ -7111,7 +7111,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             // Insert Search Grid Stuff here
             //------------------------
 
-            string landinglist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\CompetitionTakeoffLandingPoints\NorthAirStripLanding.txt");
+            string landinglist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\CompetitionTakeoffLandingPoints\NorthAirStripLanding.txt");
             string[] landing_values = landinglist.Split(',');
             int numlandingpoints = landing_values.Length / 4;
             for (int n = 0; n < numlandingpoints; n++)
@@ -7149,7 +7149,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
             WPtoScreen(cmds);
 
-            string boundarylist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\BoundaryParsed.txt");
+            string boundarylist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\BoundaryParsed.txt");
             string[] values3 = boundarylist.Split(',');
             int numboundary = values3.Length / 3;
             for (int n = 0; n < numboundary; n++)
@@ -7189,7 +7189,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 //sf.Filter = "Fence (*.fen)|*.fen";
                 //sf.ShowDialog();
-                sf.FileName = @"C:\Users\Public\Downloads\InteropCode\interop\geofence.fen";
+                sf.FileName = @"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\geofence.fen";
                 if (sf.FileName != "")
                 {
                     try
@@ -7235,7 +7235,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 //fd.Filter = "Fence (*.fen)|*.fen";
                 //fd.ShowDialog();
-                fd.FileName = @"C:\Users\Public\Downloads\InteropCode\interop\geofence.fen";
+                fd.FileName = @"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\geofence.fen";
                 if (File.Exists(fd.FileName))
                 {
                     StreamReader sr = new StreamReader(fd.OpenFile());
@@ -7303,7 +7303,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             //------------------------------------
             //Initializing Takeoff Waypoint
             List<Locationwp> cmds = new List<Locationwp>();
-            string homelist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\PradoAirPark\PradoTakeoff&Landing\PradoHomePosition&Takeoff.txt");
+            string homelist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\PradoAirPark\PradoTakeoff&Landing\PradoHomePosition&Takeoff.txt");
             string[] values2 = homelist.Split(',');
             int numhomepoints = values2.Length / 2;
             for (int n = 0; n < numhomepoints; n++)
@@ -7327,7 +7327,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 wp.lat = (float)Convert.ToDouble(values2[i]);
                 cmds.Add(wp);
             }
-            string missionlist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\MissionPointsWithSearch.txt");
+            string missionlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\MissionPointsWithSearch.txt");
             string[] values = missionlist.Split(',');
             int nummissionpoints = values.Length / 4;
             for (int n = 0; n < nummissionpoints; n++)
@@ -7342,7 +7342,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
             //-------------------------------------
             //Initializing Landing Points
-            string landinglist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\PradoAirPark\PradoTakeoff&Landing\PradoLanding.txt");
+            string landinglist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\PradoAirPark\PradoTakeoff&Landing\PradoLanding.txt");
             string[] landing_values = landinglist.Split(',');
             int numlandingpoints = landing_values.Length / 4;
             for (int n = 0; n < numlandingpoints; n++)
@@ -7393,7 +7393,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             searchgrid_startinfo.UseShellExecute = false;
             searchgrid_startinfo.RedirectStandardOutput = true;
             searchgrid_startinfo.CreateNoWindow = false;
-            searchgrid_startinfo.FileName = "C://Users//Public//Downloads//InteropCode//interop//main.exe"; //Rename the exe to SearchGrid.exe
+            searchgrid_startinfo.FileName = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\scripts\\SearchGrid.exe";
             searchgrid_startinfo.WindowStyle = ProcessWindowStyle.Hidden;
             // start python app with 3 arguments  
             // 1st arguments is pointer to itself,  
@@ -7409,7 +7409,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             searchGridProcess.WaitForExit();
             ///--------------------------------------------------------------
             // python app to call 
-            string myPythonApp = "C://Users//Public//Downloads//InteropCode//obstacle_avoidance.py";
+            string myPythonApp = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\scripts\\obstacle_avoidance.py";
 
             // dummy parameters to send Python script 
 
