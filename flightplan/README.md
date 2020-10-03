@@ -11,7 +11,12 @@
     <li><strong>SearchGrid.exe: </strong>Coverage path planning for search grid. Compiled to run on Windows x86.</li>
   </ul>
 </p>
-<h3>Expected absolute paths for mission text files</h3>
+<h3>Expected Absolute Paths for Mission Text Files</h3>
+<ul>
+  <li><strong>Obstacle Avoidance: </strong>C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\scripts\ObstacleAvoidance.py</li>
+  <li><strong>Search Grid: </strong>C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\scripts\SearchGrid.exe</li>
+</ul>
+<h3>Expected Absolute Paths for Mission Text Files</h3>
 <ul>
   <li><strong>MissionPointsWithSearch.txt:</strong> C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\MissionPointsWithSearch.txt</li>
   <li><strong>MissionPointsParsed.txt:</strong> C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\MissionPointsParsed.txt</li>
