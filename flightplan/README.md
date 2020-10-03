@@ -6,8 +6,8 @@
 <p>
   All scripts are located in scripts folder.
   <ul>
-    <li><strong>ObstacleAvoidance.py:</strong>Obstacle avoidance script</li>
-    <li><strong>SearchGrid.exe</strong>Coverage path planning for search grid. Compiled to run on Windows x86.</li>
+    <li><strong>ObstacleAvoidance.py: </strong>Obstacle avoidance script</li>
+    <li><strong>SearchGrid.exe: </strong>Coverage path planning for search grid. Compiled to run on Windows x86.</li>
   </ul>
 </p>
 <h3>Expected absolute paths for mission text files</h3>
