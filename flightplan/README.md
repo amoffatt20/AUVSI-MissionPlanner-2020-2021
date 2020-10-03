@@ -1,5 +1,6 @@
 <h1>Flight Plan Folder</h1>
 <p>
+  This folder contains all relevant files and resources for flight plan.<br>
   Populate this README with information regarding the purpose and structure of the contents as they are made.
 </p>
 <h3>Scripts</h3>
