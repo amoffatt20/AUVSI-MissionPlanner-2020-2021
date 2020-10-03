@@ -71,7 +71,7 @@ namespace MissionPlanner.GCSViews
         }
         public static void GuidedModeActual()
         {
-            string missionlist = System.IO.File.ReadAllText(@"C:\Users\Public\Downloads\InteropCode\interop\MissionPointsParsed.txt");
+            string missionlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\MissionPointsParsed.txt");
             GuidedModeValue.values_mission = missionlist.Split(',');
             GuidedModeValue.waypoints_total = GuidedModeValue.values_mission.Length / 4;
         }
