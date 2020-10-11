@@ -36,15 +36,15 @@ def line_intersect(A1,A2,B1,B2):
     
     A_y = A1[1] - slope_A*A1[0]
     B_y = B1[1] - slope_B*B1[0]
-            # y = mx + b
-            # Set both lines equal to find the intersection point in the x direction
-            # m1 * x + b1 = m2 * x + b2
-            # m1 * x - m2 * x = b2 - b1
-            # x * (m1 - m2) = b2 - b1
-            # x = (b2 - b1) / (m1 - m2)
+  		  # y = mx + b
+  		  # Set both lines equal to find the intersection point in the x direction
+   		 # m1 * x + b1 = m2 * x + b2
+   		 # m1 * x - m2 * x = b2 - b1
+  		  # x * (m1 - m2) = b2 - b1
+  		  # x = (b2 - b1) / (m1 - m2)
     x = (B_y - A_y) / (slope_A - slope_B)
-            # Now solve for y -- use either line, because they are equal here
-            # y = mx + b
+  		  # Now solve for y -- use either line, because they are equal here
+   		 # y = mx + b
     y = slope_A * x + A_y
     return x,y
 
@@ -145,7 +145,7 @@ def object_avoidance(Ax,Ay,Bx,By,Cx,Cy,R):
 #C:\Users\Public\Downloads\InteropCode\interop\MissionPointsParsedObstacle.txt
 
 
-path1 = 'C:\Users\Public\Downloads\InteropCode\interop\MissionPointsParsed.txt'
+path1 = 'C:\Users\Public\Downloads\InteropCode\interop\MissionPointsWithSearch.txt' # Should be reading from MissionPointsWithSearch.txt
 MissionPlanned = open(path1,'r')
 
 
