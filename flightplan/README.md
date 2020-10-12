@@ -22,4 +22,5 @@
   <li><strong>MissionPointsParsed.txt:</strong> C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\MissionPointsParsed.txt</li>
   <li><strong>BoundaryPoints.txt:</strong> C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\BoundaryPoints.txt</li>
   <li><strong>SearchGridParsed.txt:</strong> C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\SearchGridParsed.txt</li>
+  <li><string><strong>StationaryParsed.txt:</strong>C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\StationaryParsed.txt</li>
 </ul>
