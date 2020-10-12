@@ -10,6 +10,7 @@ import numpy as np
 
 import pyproj
 # !pip3 install pyproj
+import sys
 
 P = pyproj.Proj(proj='utm', zone=18,ellps='WGS84', preserve_units=True)
 G = pyproj.Geod(ellps='WGS84')
@@ -145,15 +146,22 @@ def object_avoidance(Ax,Ay,Bx,By,Cx,Cy,R):
 #C:\Users\Public\Downloads\InteropCode\interop\MissionPointsParsedObstacle.txt
 
 
-path1 = 'C:\Users\Public\Downloads\InteropCode\interop\MissionPointsWithSearch.txt' # Should be reading from MissionPointsWithSearch.txt
-MissionPlanned = open(path1,'r')
-
+path1 = 'C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\MissionPointsWithSearch.txt' # Should be reading from MissionPointsWithSearch.txt
+try:
+    MissionPlanned = open(path1,'r')
+except (OSError, IOError) as e:
+    print(e)
+    sys.exit(1)
 
 Mission_Planned = MissionPlanned.read()
 
 
-path2 = 'C:\Users\Public\Downloads\InteropCode\interop\StationaryParsed.txt'
-MissionObstacle = open(path2,'r')
+path2 = 'C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\mission\StationaryParsed.txt'
+try:
+    MissionObstacle = open(path2,'r')
+except (OSError, IOError) as e:
+    print(e)
+    sys.exit(1)
 
 Mission_Obstacle=MissionObstacle.read()
 
