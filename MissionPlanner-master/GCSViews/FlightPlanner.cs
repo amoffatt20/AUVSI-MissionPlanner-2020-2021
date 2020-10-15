@@ -7409,7 +7409,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             searchGridProcess.WaitForExit();
             ///--------------------------------------------------------------
             // python app to call 
-            string myPythonApp = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\scripts\\obstacle_avoidance.py";
+            string myPythonApp = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\scripts\\ObstacleAvoidance.py";
 
             // dummy parameters to send Python script 
 
