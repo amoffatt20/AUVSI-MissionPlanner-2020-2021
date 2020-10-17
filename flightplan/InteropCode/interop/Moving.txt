@@ -1,0 +1,3 @@
+MovingObstacle(latitude=38.14057774641256, longitude=-76.42947826330605, altitude_msl=300.00000000000006, sphere_radius=200.0)
+MovingObstacle(latitude=38.1442796973963, longitude=-76.43054758991626, altitude_msl=175.92760676768802, sphere_radius=50.0)
+MovingObstacle(latitude=38.142625523721215, longitude=-76.4331086445356, altitude_msl=72.91401722840418, sphere_radius=100.0)

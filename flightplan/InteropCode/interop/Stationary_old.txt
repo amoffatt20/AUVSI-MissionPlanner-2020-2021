@@ -1,0 +1,2 @@
+StationaryObstacle(latitude=38.14792, longitude=-76.427995, cylinder_radius=150.0, cylinder_height=200.0)
+StationaryObstacle(latitude=38.145823, longitude=-76.422396, cylinder_radius=50.0, cylinder_height=300.0)
