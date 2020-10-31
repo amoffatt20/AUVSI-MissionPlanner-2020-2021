@@ -7303,30 +7303,30 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             //------------------------------------
             //Initializing Takeoff Waypoint
             List<Locationwp> cmds = new List<Locationwp>();
-            string homelist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\PradoAirPark\PradoTakeoff&Landing\PradoHomePosition&Takeoff.txt");
-            string[] values2 = homelist.Split(',');
-            int numhomepoints = values2.Length / 2;
-            for (int n = 0; n < numhomepoints; n++)
-            {
-                int i = 0 + (2 * n);
-                Locationwp wp = new Locationwp();
-                wp.alt = (float)0;
-                wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                wp.lng = (float)Convert.ToDouble(values2[i + 1]);
-                wp.lat = (float)Convert.ToDouble(values2[i]);
-                cmds.Add(wp);
-            }
-            for (int n = 0; n < numhomepoints; n++)
-            {
-                int i = 0 + (2 * n);
-                Locationwp wp = new Locationwp();
-                wp.alt = (float)(40 * 0.3048); //once plane reaches 40 feet, moves onto next waypoint
-                wp.id = (byte)MAVLink.MAV_CMD.TAKEOFF;
-                wp.p1 = 15; //parameter for believer for takeoff, its either AoA or climb-rate
-                wp.lng = (float)Convert.ToDouble(values2[i + 1]);
-                wp.lat = (float)Convert.ToDouble(values2[i]);
-                cmds.Add(wp);
-            }
+            //string homelist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\PradoAirPark\PradoTakeoff&Landing\PradoHomePosition&Takeoff.txt");
+            //string[] values2 = homelist.Split(',');
+            //int numhomepoints = values2.Length / 2;
+            //for (int n = 0; n < numhomepoints; n++)
+            //{
+            //    int i = 0 + (2 * n);
+            //    Locationwp wp = new Locationwp();
+            //    wp.alt = (float)0;
+            //    wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
+            //    wp.lng = (float)Convert.ToDouble(values2[i + 1]);
+            //    wp.lat = (float)Convert.ToDouble(values2[i]);
+            //    cmds.Add(wp);
+            //}
+            //for (int n = 0; n < numhomepoints; n++)
+            //{
+            //    int i = 0 + (2 * n);
+            //    Locationwp wp = new Locationwp();
+            //    wp.alt = (float)(40 * 0.3048); //once plane reaches 40 feet, moves onto next waypoint
+            //    wp.id = (byte)MAVLink.MAV_CMD.TAKEOFF;
+            //    wp.p1 = 15; //parameter for believer for takeoff, its either AoA or climb-rate
+            //    wp.lng = (float)Convert.ToDouble(values2[i + 1]);
+            //    wp.lat = (float)Convert.ToDouble(values2[i]);
+            //    cmds.Add(wp);
+            //}
             string missionlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\MissionPointsWithSearch.txt");
             string[] values = missionlist.Split(',');
             int nummissionpoints = values.Length / 4;
@@ -7340,45 +7340,33 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 wp.lat = (float)Convert.ToDouble(values[i + 1]);
                 cmds.Add(wp);
             }
-            //-------------------------------------
-            //Initializing Landing Points
-            string landinglist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\PradoAirPark\PradoTakeoff&Landing\PradoLanding.txt");
-            string[] landing_values = landinglist.Split(',');
-            int numlandingpoints = landing_values.Length / 4;
-            for (int n = 0; n < numlandingpoints; n++)
-            {
-                int i = 0 + (4 * n);
-                if (n < numlandingpoints - 1)
-                {
-                    Locationwp wp = new Locationwp();
-                    wp.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
-                    wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                    wp.lng = (float)Convert.ToDouble(landing_values[i + 2]);
-                    wp.lat = (float)Convert.ToDouble(landing_values[i + 1]);
-                    cmds.Add(wp);
-                }
-                /*
-                //LegacyStuffAttempt Using LandingPointsSequence
-                if (n == numlandingpoints-2)
-                {
-                    Locationwp wp1 = new Locationwp();
-                    wp1.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
-                    wp1.id = (byte)MAVLink.MAV_CMD.DO_LAND_START;
-                    wp1.lng = (float)Convert.ToDouble(landing_values[i + 2]);
-                    wp1.lat = (float)Convert.ToDouble(landing_values[i + 1]);
-                    cmds.Add(wp1);
-                }
-                */
-                if (n == numlandingpoints - 1)
-                {
-                    Locationwp wp1 = new Locationwp();
-                    wp1.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
-                    wp1.id = (byte)MAVLink.MAV_CMD.LAND;
-                    wp1.lng = (float)Convert.ToDouble(landing_values[i + 2]);
-                    wp1.lat = (float)Convert.ToDouble(landing_values[i + 1]);
-                    cmds.Add(wp1);
-                }
-            }
+            ////-------------------------------------
+            ////Initializing Landing Points
+            //string landinglist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\PradoAirPark\PradoTakeoff&Landing\PradoLanding.txt");
+            //string[] landing_values = landinglist.Split(',');
+            //int numlandingpoints = landing_values.Length / 4;
+            //for (int n = 0; n < numlandingpoints; n++)
+            //{
+            //    int i = 0 + (4 * n);
+            //    if (n < numlandingpoints - 1)
+            //    {
+            //        Locationwp wp = new Locationwp();
+            //        wp.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
+            //        wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
+            //        wp.lng = (float)Convert.ToDouble(landing_values[i + 2]);
+            //        wp.lat = (float)Convert.ToDouble(landing_values[i + 1]);
+            //        cmds.Add(wp);
+            //    }
+            //    if (n == numlandingpoints - 1)
+            //    {
+            //        Locationwp wp1 = new Locationwp();
+            //        wp1.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
+            //        wp1.id = (byte)MAVLink.MAV_CMD.LAND;
+            //        wp1.lng = (float)Convert.ToDouble(landing_values[i + 2]);
+            //        wp1.lat = (float)Convert.ToDouble(landing_values[i + 1]);
+            //        cmds.Add(wp1);
+            //    }
+            //}
             WPtoScreen(cmds);
         }
 
