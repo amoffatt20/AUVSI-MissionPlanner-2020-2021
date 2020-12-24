@@ -5,7 +5,8 @@
 </p>
 <h3>Scripts</h3>
 <p>
-  All scripts are located in scripts folder.
+  All scripts are located in scripts folder.<br>
+  <strong>Expected Absolute Path: </strong>C:\Users\Public\Downloads\AUVSI-MissionPlanner-2020-2021\flightplan\scripts
   <ul>
     <li><strong>ObstacleAvoidance.py: </strong>Obstacle avoidance script</li>
     <li><strong>SearchGrid.exe: </strong>Coverage path planning for search grid. Compiled to run on Windows x86.</li>
