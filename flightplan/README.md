@@ -10,6 +10,7 @@
   <ul>
     <li><strong>ObstacleAvoidance.py: </strong>Obstacle avoidance script</li>
     <li><strong>SearchGrid.exe: </strong>Coverage path planning for search grid. Compiled to run on Windows x86.</li>
+    <li><strong>DropCalculations2019_11_09.m: </strong>Matlab code for drop calculations</li>
   </ul>
 </p>
 <h3>Expected Absolute Paths for Mission Text Files</h3>
