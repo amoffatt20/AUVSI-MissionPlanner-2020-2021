@@ -6980,321 +6980,36 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void myButton1_Click(object sender, EventArgs e)
         {
-            //This is the NorthAirStripSearch Button
-            //PUT YOUR CODE BELOW THIS LINE
-            //--------------------------------------------------
-            List<Locationwp> cmds = new List<Locationwp>();
-            string homelist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\CompetitionTakeoffLandingPoints\\NorthAirStripHome.txt");
-            string[] values2 = homelist.Split(',');
-            int numhomepoints = values2.Length / 2;
-            for (int n = 0; n < numhomepoints; n++)
-            {
-                int i = 0 + (2 * n);
-                Locationwp wp = new Locationwp();
-                wp.alt = (float)0;
-                wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                wp.lng = (float)Convert.ToDouble(values2[i + 1]);
-                wp.lat = (float)Convert.ToDouble(values2[i]);
-                cmds.Add(wp);
-            }
-            for (int n = 0; n < numhomepoints; n++)
-            {
-                int i = 0 + (2 * n);
-                Locationwp wp = new Locationwp();
-                wp.alt = (float)(130 * 0.3048);
-                wp.id = (byte)MAVLink.MAV_CMD.TAKEOFF;
-                wp.p1 = 15;
-                wp.lng = (float)Convert.ToDouble(values2[i + 1]);
-                wp.lat = (float)Convert.ToDouble(values2[i]);
-                cmds.Add(wp);
-            }
-            string takeofflist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\CompetitionTakeoffLandingPoints\NorthAirStripTakeoff.txt");
-            string[] takeoff_values = takeofflist.Split(',');
-            int numtakeofflist = takeoff_values.Length / 4;
-            for (int n = 0; n < numtakeofflist; n++)
-            {
-                int i = 0 + (4 * n);
-                Locationwp wp = new Locationwp();
-                wp.alt = (float)(Convert.ToDouble(takeoff_values[i + 3]) * 0.3048);
-                wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                wp.lng = (float)Convert.ToDouble(takeoff_values[i + 2]);
-                wp.lat = (float)Convert.ToDouble(takeoff_values[i + 1]);
-                cmds.Add(wp);
-            }
-            ProcessStartInfo obstacle_startinfo = new ProcessStartInfo();
+             //calls the wind prediction method given numbers from an input text file
+            //format: 1 input/line
+            string[] lines = System.IO.File.ReadAllLines(@"D:\temp\temp.txt");//replace with the path to a file of the given format
+            windPredictCaller(lines);
+        }
+        public static void windPredictCaller(string[] list)
+        {
 
-            // make sure we can read the output from stdout 
-            obstacle_startinfo.UseShellExecute = false;
-            obstacle_startinfo.RedirectStandardOutput = true;
-            obstacle_startinfo.CreateNoWindow = false;
-            obstacle_startinfo.FileName = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\Pathfinding.exe";
-            obstacle_startinfo.WindowStyle = ProcessWindowStyle.Hidden;
+            MLApp.MLApp matlab = new MLApp.MLApp();
 
-            // start python app with 3 arguments  
-            // 1st arguments is pointer to itself,  
-            // 2nd and 3rd are actual arguments we want to send 
+            // Change to the directory where the function is located 
+            matlab.Execute(@"cd C:\Users\1ninj\OneDrive\Documents\MATLAB"); //replace with path to matlab file
 
+            object result = null;
+            matlab.Feval(/*replace with name of matlab file*/"temp", 2, out result,/* change the following to correct inputs */ Convert.ToDouble(list[0]), Convert.ToDouble(list[1]), Convert.ToDouble(list[2]), Convert.ToDouble(list[3]), Convert.ToDouble(list[4]), Convert.ToDouble(list[5]), Convert.ToDouble(list[6]), Convert.ToDouble(list[7]), Convert.ToDouble(list[8]));
+            // inputs are:                                                                                                     GPStar1,GPStar2, GPSwpi1,GPSwpi2, CruisingSpd, DropAlt, California, AvgMagWS, AvgDirWS
+            // GPStar1 = Latitude of the target you want to hit { degrees}
+            // GPStar2 = Longitude of the target you want to hit { degrees}
+            // GPSwpi1 = Latitude of the way point immediately before the target in mission planner { degrees}
+            // GPSwpi2 = Longitude of the way point immediately before the target in mission planner { degrees}
+            // CruisingSpd = [Velocity] airspeed at which the payload will be dropped { knots}
+            // DropAlt = Altitude at which the payload will be dropped { meters}
+            // California = [1] if tests are in CA, [0] if in Maryland
+            // AvgMagWS = [Windspeed] Velocity of the wind { meter/s }
+            // AvgDirWS = [Direction] Direction of the wind with Eastward bound = 0 going C.C.W. { degrees }
 
-            Process myProcess = new Process();
-            // assign start information to the process 
-            myProcess.StartInfo = obstacle_startinfo;
-
-
-            // start the process 
-            myProcess.Start();
-
-            // Read the standard output of the app we called.  
-            // in order to avoid deadlock we will read output first 
-            // and then wait for process terminate: 
-            myProcess.WaitForExit();
-            string missionlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\MissionPointsParsedObstacle.txt");
-            string[] values = missionlist.Split(',');
-            int nummissionpoints = values.Length / 4;
-            for (int n = 0; n < nummissionpoints; n++)
-            {
-                int i = 0 + (4 * n);
-                Locationwp wp = new Locationwp();
-                wp.alt = (float)(Convert.ToDouble(values[i + 3]) * 0.3048);
-                wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                wp.lng = (float)Convert.ToDouble(values[i + 2]);
-                wp.lat = (float)Convert.ToDouble(values[i + 1]);
-                cmds.Add(wp);
-            }
-
-            //------------------------
-            // Insert Search Grid Stuff here
-            //------------------------
-            ProcessStartInfo search_startinfo = new ProcessStartInfo();
-
-            // make sure we can read the output from stdout 
-            search_startinfo.UseShellExecute = false;
-            search_startinfo.RedirectStandardOutput = true;
-            search_startinfo.CreateNoWindow = false;
-            search_startinfo.FileName = "C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\SearchGridWaypoints.exe";
-            search_startinfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-            // start python app with 3 arguments  
-            // 1st arguments is pointer to itself,  
-            // 2nd and 3rd are actual arguments we want to send 
-
-
-            Process myProcess_search = new Process();
-            // assign start information to the process 
-            myProcess_search.StartInfo = search_startinfo;
-
-
-            // start the process 
-            myProcess_search.Start();
-
-            // Read the standard output of the app we called.  
-            // in order to avoid deadlock we will read output first 
-            // and then wait for process terminate: 
-            myProcess_search.WaitForExit();
-
-            string searchlist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\SearchGridWaypoints.txt");
-            searchlist.TrimEnd(',');
-            string[] values_search = searchlist.Split(',');
-            int numsearchpoints = values_search.Length / 4;
-            for (int n = 0; n < numsearchpoints; n++)
-            {
-                int i = 0 + (4 * n);
-                Locationwp wp = new Locationwp();
-                //wp.alt = (float)(Convert.ToDouble(150 * 0.3048));
-                wp.alt = (float)(Convert.ToDouble(values_search[i + 3]) * 0.3048);
-                wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                wp.lng = (float)Convert.ToDouble(values_search[i + 2]);
-                wp.lat = (float)Convert.ToDouble(values_search[i + 1]);
-                cmds.Add(wp);
-            }
-
-            //------------------------
-            // Insert Search Grid Stuff here
-            //------------------------
-
-            string landinglist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\CompetitionTakeoffLandingPoints\NorthAirStripLanding.txt");
-            string[] landing_values = landinglist.Split(',');
-            int numlandingpoints = landing_values.Length / 4;
-            for (int n = 0; n < numlandingpoints; n++)
-            {
-                int i = 0 + (4 * n);
-                if (n < numlandingpoints - 1)
-                {
-                    Locationwp wp = new Locationwp();
-                    wp.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
-                    wp.id = (byte)MAVLink.MAV_CMD.WAYPOINT;
-                    wp.lng = (float)Convert.ToDouble(landing_values[i + 2]);
-                    wp.lat = (float)Convert.ToDouble(landing_values[i + 1]);
-                    cmds.Add(wp);
-                }
-                /*
-                if (n == numlandingpoints-2)
-                {
-                    Locationwp wp1 = new Locationwp();
-                    wp1.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
-                    wp1.id = (byte)MAVLink.MAV_CMD.DO_LAND_START;
-                    wp1.lng = (float)Convert.ToDouble(landing_values[i + 2]);
-                    wp1.lat = (float)Convert.ToDouble(landing_values[i + 1]);
-                    cmds.Add(wp1);
-                }
-                */
-                if (n == numlandingpoints - 1)
-                {
-                    Locationwp wp1 = new Locationwp();
-                    wp1.alt = (float)(Convert.ToDouble(landing_values[i + 3]) * 0.3048);
-                    wp1.id = (byte)MAVLink.MAV_CMD.LAND;
-                    wp1.lng = (float)Convert.ToDouble(landing_values[i + 2]);
-                    wp1.lat = (float)Convert.ToDouble(landing_values[i + 1]);
-                    cmds.Add(wp1);
-                }
-            }
-            WPtoScreen(cmds);
-
-            string boundarylist = System.IO.File.ReadAllText(@"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\BoundaryParsed.txt");
-            string[] values3 = boundarylist.Split(',');
-            int numboundary = values3.Length / 3;
-            for (int n = 0; n < numboundary; n++)
-            {
-                int i = 0 + (3 * n);
-                /*
-                geofenceoverlay.Markers.Add(new GMarkerGoogle(new PointLatLng(Convert.ToDouble(values3[i + 1]), Convert.ToDouble(values3[i + 2])), GMarkerGoogleType.red)
-                {
-                    ToolTipMode = MarkerTooltipMode.OnMouseOver,
-                    ToolTipText = "GeoFence Return"
-                });
-                */
-                drawnpolygon.Points.Add(new PointLatLng(Convert.ToDouble(values3[i + 1]), Convert.ToDouble(values3[i + 2])));
-            }
-
-            geofenceoverlay.Markers.Add(new GMarkerGoogle(new PointLatLng(38.1447777777778, -76.4294166666667), //termination point from the rules
-                GMarkerGoogleType.red)
-            { ToolTipMode = MarkerTooltipMode.OnMouseOver, ToolTipText = "GeoFence Return" });
-
-            MainMap.Invalidate();
-            /*
-            for (int n = 0; n < numhomepoints; n++)
-            {
-                int i = 0 + (2 * n);
-                geofenceoverlay.Markers.Add(new GMarkerGoogle(new PointLatLng(Convert.ToDouble(values2[i]), Convert.ToDouble(values2[i + 1])),
-                GMarkerGoogleType.red)
-                { ToolTipMode = MarkerTooltipMode.OnMouseOver, ToolTipText = "GeoFence Return" });
-                MainMap.Invalidate();
-            }
-            */
-            if (geofenceoverlay.Markers.Count == 0)
-            {
-                CustomMessageBox.Show("Please set a return location");
-                return;
-            }
-            using (SaveFileDialog sf = new SaveFileDialog())
-            {
-                //sf.Filter = "Fence (*.fen)|*.fen";
-                //sf.ShowDialog();
-                sf.FileName = @"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\geofence.fen";
-                if (sf.FileName != "")
-                {
-                    try
-                    {
-                        StreamWriter sw = new StreamWriter(sf.OpenFile());
-
-                        sw.WriteLine("#saved by APM Planner " + Application.ProductVersion);
-
-                        sw.WriteLine(geofenceoverlay.Markers[0].Position.Lat + " " +
-                                     geofenceoverlay.Markers[0].Position.Lng);
-                        if (drawnpolygon.Points.Count > 0)
-                        {
-                            foreach (var pll in drawnpolygon.Points)
-                            {
-                                sw.WriteLine(pll.Lat + " " + pll.Lng);
-                            }
-
-                            PointLatLng pll2 = drawnpolygon.Points[0];
-
-                            sw.WriteLine(pll2.Lat + " " + pll2.Lng);
-                        }
-                        else
-                        {
-                            foreach (var pll in geofencepolygon.Points)
-                            {
-                                sw.WriteLine(pll.Lat + " " + pll.Lng);
-                            }
-
-                            PointLatLng pll2 = geofencepolygon.Points[0];
-
-                            sw.WriteLine(pll2.Lat + " " + pll2.Lng);
-                        }
-
-                        sw.Close();
-                    }
-                    catch
-                    {
-                        CustomMessageBox.Show("Failed to write fence file");
-                    }
-                }
-            }
-            using (OpenFileDialog fd = new OpenFileDialog())
-            {
-                //fd.Filter = "Fence (*.fen)|*.fen";
-                //fd.ShowDialog();
-                fd.FileName = @"C:\\Users\\Public\\Downloads\\AUVSI-MissionPlanner-2020-2021\\flightplan\\mission\\geofence.fen";
-                if (File.Exists(fd.FileName))
-                {
-                    StreamReader sr = new StreamReader(fd.OpenFile());
-
-                    drawnpolygonsoverlay.Markers.Clear();
-                    drawnpolygonsoverlay.Polygons.Clear();
-                    drawnpolygon.Points.Clear();
-
-                    int a = 0;
-
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        if (line.StartsWith("#"))
-                        {
-                        }
-                        else
-                        {
-                            string[] items = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-
-                            if (a == 0)
-                            {
-                                geofenceoverlay.Markers.Clear();
-                                geofenceoverlay.Markers.Add(
-                                    new GMarkerGoogle(new PointLatLng(double.Parse(items[0]), double.Parse(items[1])),
-                                        GMarkerGoogleType.red)
-                                    {
-                                        ToolTipMode = MarkerTooltipMode.OnMouseOver,
-                                        ToolTipText = "GeoFence Return"
-                                    });
-                                MainMap.UpdateMarkerLocalPosition(geofenceoverlay.Markers[0]);
-                            }
-                            else
-                            {
-                                drawnpolygon.Points.Add(new PointLatLng(double.Parse(items[0]), double.Parse(items[1])));
-                                addpolygonmarkergrid(drawnpolygon.Points.Count.ToString(), double.Parse(items[1]),
-                                    double.Parse(items[0]), 0);
-                            }
-                            a++;
-                        }
-                    }
-
-                    // remove loop close
-                    if (drawnpolygon.Points.Count > 1 &&
-                        drawnpolygon.Points[0] == drawnpolygon.Points[drawnpolygon.Points.Count - 1])
-                    {
-                        drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1);
-                    }
-
-                    drawnpolygonsoverlay.Polygons.Add(drawnpolygon);
-
-                    MainMap.UpdatePolygonLocalPosition(drawnpolygon);
-
-                    MainMap.Invalidate();
-                }
-            }
-            //Console.WriteLine(res[0]);
-            //Console.WriteLine(res[1]);
-            //Console.ReadLine();
+            object[] res = result as object[];
+            Console.WriteLine(res[0]);
+            Console.WriteLine(res[1]);
+            Console.ReadLine();
         }
 
         private void myButton2_Click(object sender, EventArgs e)
