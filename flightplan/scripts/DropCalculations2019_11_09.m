@@ -1,4 +1,4 @@
-function [LAT, LON] = DropCalculations2019_11_09(GPStar, GPSwpi, CruisingSpd, DropAlt, California, AvgMagWS, AvgDirWS)
+function [LAT, LON] = DropCalculations2019_11_09(GPStar1,GPStar2, GPSwpi1,GPSwpi2, CruisingSpd, DropAlt, California, AvgMagWS, AvgDirWS)
 
     %GPStar = [Latitude, Longitude] of the target you want to hit {degrees} 
     % GPSwpi = [Latitude, Longitude] of the way point immediately before the target in mission planner {degrees}
@@ -44,10 +44,10 @@ function [LAT, LON] = DropCalculations2019_11_09(GPStar, GPSwpi, CruisingSpd, Dr
     AvgMagWS = AvgMagWS / 1.944;                    %Change wind speed from knots to m/s
 
     % Change in Latitude from approach point to target {radians}, gives the flight path in the Y direction/vertical axis/aka north and south
-    dLat = GPStar(1) - GPSwpi(1);
+    dLat = GPStar1 - GPSwpi1;
     
     % Change in Longitude from approach point to target {radians}, gives the flight path in the X direction/horizontal axis/aka east and west
-    dLon = GPStar(2) - GPSwpi(2);
+    dLon = GPStar2 - GPSwpi2;
     
     % Change in displacement in the north and east directions {meters}
     GPSChange = LatLonxy(dLat, dLon, California); %calls function below to convert dLat to dnorth and dLon to dEast
@@ -82,8 +82,8 @@ function [LAT, LON] = DropCalculations2019_11_09(GPStar, GPSwpi, CruisingSpd, Dr
     
     GPSChangetoLATLON = dist1 + dist2;  %Total displacement, Degrees
     
-    LAT = GPStar(1)-GPSChangetoLATLON(1);                   %Latitude of drop location, Degrees
-    LON = GPStar(2)-GPSChangetoLATLON(2);                   %Longitude of drop location, Degrees
+    LAT = GPStar1-GPSChangetoLATLON(1);                   %Latitude of drop location, Degrees
+    LON = GPStar2-GPSChangetoLATLON(2);                   %Longitude of drop location, Degrees
     
     fid=fopen('gpsoutput2.txt','w');
     fprintf(fid, '%f %f \n', [LAT LON]');
